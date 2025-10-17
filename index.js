@@ -5,12 +5,17 @@ const cors = require("cors");
 require("dotenv").config();
 const app = express();
 
-const connectDB = () => {
-    mongoose.connect(process.env.URI)
+const connectDB = async() => {
+  try {
+     await  mongoose.connect(process.env.URI)
     console.log("mongoDB connected Succesfully")
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 connectDB();
+
 
 var corsOptions = {
   origin:  process.env.FRONTEND_URL || 'http://localhost:5173',
